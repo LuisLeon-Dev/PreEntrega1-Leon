@@ -99,4 +99,6 @@ if (playerPoints > computerPoints) {
   alert(
     `Lo siento! perdiste \nPuntaje jugador: ${playerPoints} \nPuntaje computadora: ${computerPoints}`
   );
+} else if (computerPoints == playerPoints) {
+  alert("Fue un empate");
 }
