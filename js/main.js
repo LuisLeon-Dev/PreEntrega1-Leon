@@ -16,11 +16,12 @@ const costaRica = new Weather("Costa Rica", "San Jose", "26 °C");
 //array que almacena todos los objetos
 const weatherArray = [elSalvador, guatemala, honduras, nicaragua, costaRica];
 
-//opcion de usuario
+//seleccion del usuario
 let userSelection = prompt(
   `Digita el nombre del pais desees saber el clima: \n1. El Salvador \n2. Guatemala \n3. Honduras \n4. Nicaragua \n5. Costa Rica \n6. Salir`
 );
 
+//Encontrar en el array el pais seleccionado
 const foundWeather = weatherArray.find((city) => {
   if (city.country === userSelection) {
     return alert(
