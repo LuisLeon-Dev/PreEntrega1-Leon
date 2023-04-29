@@ -16,16 +16,40 @@ const costaRica = new Weather("Costa Rica", "San Jose", "26 °C");
 //array que almacena todos los objetos
 const weatherArray = [elSalvador, guatemala, honduras, nicaragua, costaRica];
 
-//seleccion del usuario
-let userSelection = prompt(
-  `Digita el nombre del pais desees saber el clima: \n1. El Salvador \n2. Guatemala \n3. Honduras \n4. Nicaragua \n5. Costa Rica \n6. Salir`
-);
+//variables
+const Selection = "Guatemala";
+const card = document.getElementById("weather");
+const button = document.getElementById("button");
 
-//Encontrar en el array el pais seleccionado
-const foundWeather = weatherArray.find((city) => {
-  if (city.country === userSelection) {
-    return alert(
-      `Nombre del país: ${city.country} \nCapital del país: ${city.city} \nEl clima es de: ${city.cityWeather}`
-    );
-  }
+//funcion para obtener el valor del input
+const getInputText = () => {
+  const userSelection = document.getElementById("city").value;
+  return userSelection;
+};
+
+//funcion que busca el pais seleccionado
+const findCountry = () => {
+  weatherArray.find(({ country, city, cityWeather }) => {
+    if (country === getInputText()) {
+      return (card.innerHTML = `
+      <div>
+          <p>Pais: ${country}</p>
+          <p>Ciudad: ${city}</p>
+          <p>Temperatura: ${cityWeather}</p>
+          <button type="submit" id="favoritos">añadir a favoritos</button>
+        </div>
+    
+    `);
+    } else {
+      card.innerHTML = `
+        <p>Datos no encontrados</p>
+      `;
+    }
+  });
+};
+
+//Evento que renderiza la card
+button.addEventListener("click", (e) => {
+  e.preventDefault();
+  findCountry();
 });
