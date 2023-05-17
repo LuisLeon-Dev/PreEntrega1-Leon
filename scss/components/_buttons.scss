@@ -1,0 +1,37 @@
+@mixin button() {
+    background-color: #45aafd;
+    color: #fff;
+    border: 0;
+    border-radius: 5px;
+    width: 150px;
+    padding: 10px 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.searchButton{
+    @include button();
+    &:hover{
+        background-color: #7dc3fc;
+        transition: 0.5s;
+    }
+
+}
+
+.button--eliminar{
+    @include button();
+    background-color: rgb(255, 56, 56);
+    &:hover{
+        background: rgb(255, 111, 111);
+        transition: 0.5;
+    }
+}
+
+.button--guardar{
+    @include button();
+        background-color: rgb(46, 214, 40);
+        &:hover {
+            background: rgb(134, 243, 76);
+            transition: 0.5;
+        }
+}

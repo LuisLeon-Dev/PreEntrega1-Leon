@@ -1,0 +1,31 @@
+.favorites {
+    .subtitle {
+        text-align: center;
+        font-size: 36px;
+        margin-top: 50px;
+    }
+}
+#favorites-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    
+}
+
+/*Media query*/
+@media screen and (max-width: 1072px) {
+#favorites-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 760px) {
+    #favorites-container {
+        grid-template-columns: repeat(2, 1fr);}
+}
+
+@media screen and (max-width: 620px) {
+    #favorites-container {
+        grid-template-columns:1fr;
+        justify-content: center;
+    }
+}

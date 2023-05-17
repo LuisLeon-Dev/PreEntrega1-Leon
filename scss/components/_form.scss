@@ -1,0 +1,22 @@
+input{
+    width: 300px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid black;
+
+}
+
+#search-form{
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+@media screen and (max-width: 500px) {
+    #search-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

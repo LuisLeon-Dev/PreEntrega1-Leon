@@ -25,38 +25,67 @@ const createCard = (country, isFavorite) => {
   const card = document.createElement("div");
   card.classList.add("card");
 
+  const temp = document.createElement("div");
+  temp.classList.add("temp");
+
   const countryName = document.createElement("h2");
   countryName.textContent = country.name;
 
+  const icon = document.createElement("img");
+  icon.src = `https://openweathermap.org/img/wn/${country.weather[0].icon}.png`;
+  icon.alt = country.weather[0].description;
+
+  const weather = document.createElement("p");
+  weather.className = "temp";
+  weather.textContent = `${country.main.temp}°C `;
+
   const weatherInfo = document.createElement("p");
-  weatherInfo.textContent = `Temperatura: ${country.main.temp}°C, Condicion: ${country.weather[0].description}`;
+  weatherInfo.textContent = `Condicion: ${country.weather[0].description}`;
 
   const button = document.createElement("button");
-  button.textContent = isFavorite ? "Borrar" : "Guardar";
+
+  button.textContent = isFavorite ? "Eliminar" : "Añadir a favoritos";
+  button.className = isFavorite ? "button--eliminar" : "button--guardar";
   button.addEventListener("click", () => {
     if (isFavorite) {
-      deleteCountryFromFavorites(country);
-      Swal.fire("Eliminado Correctamente");
+      Swal.fire({
+        title: "¿Estas seguro?",
+        text: "No podrás revertir esta acción",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "rgb(53, 236, 46)",
+        cancelButtonColor: "rgb(255, 56, 56)",
+        confirmButtonText: "Si, deseo eliminarlo",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteCountryFromFavorites(country);
+          Swal.fire(
+            "Eliminado!",
+            "El pais se elimino correctamente.",
+            "success"
+          );
+        }
+      });
     } else {
       saveCountryAsFavorite(country);
-      Swal.fire("Guardado Correctamente");
+      Swal.fire({
+        title: "Añadido a favoritos",
+        icon: "success",
+        text: "Se agrego correctamente a tus favoritos!",
+        confirmButtonColor: "#45aafd",
+      });
     }
   });
 
+  temp.appendChild(icon);
+  temp.appendChild(weather);
+
   card.appendChild(countryName);
+  card.appendChild(temp);
   card.appendChild(weatherInfo);
   card.appendChild(button);
 
   return card;
-};
-
-//Card con error
-const emptyCard = () => {
-  const card = document.createElement("div");
-  card.classList.add("card");
-
-  const countryName = document.createElement("h2");
-  countryName.textContent = "No fue posible encontrar el pais seleccionado";
 };
 
 // Función para mostrar las cards en el DOM
@@ -81,13 +110,13 @@ const saveCountryAsFavorite = (country) => {
 };
 
 // Función para eliminar el país de la seccion favoritos y del localStorage
-function deleteCountryFromFavorites(country) {
+const deleteCountryFromFavorites = (country) => {
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
   favorites = favorites.filter((favorite) => favorite.name !== country.name);
   localStorage.setItem("favorites", JSON.stringify(favorites));
 
   showFavorites();
-}
+};
 
 // Función para mostrar los países favoritos en el DOM
 const showFavorites = () => {
@@ -119,5 +148,4 @@ const searchFormSubmit = (e) => {
 const searchForm = document.getElementById("search-form");
 searchForm.addEventListener("submit", searchFormSubmit);
 
-// Mostrar los países favoritos al cargar la página
 showFavorites();
