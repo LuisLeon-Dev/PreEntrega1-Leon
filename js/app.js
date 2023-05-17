@@ -11,6 +11,7 @@ const getCountryData = (country) => {
       if (data.cod === 200) {
         const countryData = [data];
         displayCards(countryData);
+        console.log(data);
       } else {
         const countries = document.getElementById("cards-container");
         countries.innerHTML = "";
@@ -51,7 +52,7 @@ const createCard = (country, isFavorite) => {
 
   const weather = document.createElement("p");
   weather.className = "temp";
-  weather.textContent = `${country.main.temp}°C `;
+  weather.textContent = `${Number((country.main.temp - 272.15).toFixed(2))}°C `;
 
   const weatherInfo = document.createElement("p");
   weatherInfo.textContent = `Condicion: ${country.weather[0].description}`;
