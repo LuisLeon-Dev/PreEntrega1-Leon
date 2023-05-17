@@ -318,7 +318,6 @@ input {
   display: flex;
   justify-content: center;
   text-align: center;
-  margin: 3rem;
 }
 
 .card {
@@ -341,8 +340,11 @@ input {
   display: flex;
 }
 .card .temp p {
-  font-size: 20px;
+  font-size: 28px;
   font-weight: 500;
+}
+.card .temp img {
+  width: 85px;
 }
 
 .info {

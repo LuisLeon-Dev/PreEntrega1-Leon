@@ -52,7 +52,7 @@ const createCard = (country, isFavorite) => {
 
   const weather = document.createElement("p");
   weather.className = "temp";
-  weather.textContent = `${Number((country.main.temp - 270.15).toFixed(2))}°C `;
+  weather.textContent = `${Number((country.main.temp - 272.15).toFixed())}°C `;
 
   const weatherInfo = document.createElement("p");
   weatherInfo.textContent = `Condicion: ${country.weather[0].description}`;
@@ -71,12 +71,13 @@ const createCard = (country, isFavorite) => {
         confirmButtonColor: "rgb(53, 236, 46)",
         cancelButtonColor: "rgb(255, 56, 56)",
         confirmButtonText: "Si, deseo eliminarlo",
+        cancelButtonText: "Cancelar",
       }).then((result) => {
         if (result.isConfirmed) {
           deleteCountryFromFavorites(country);
           Swal.fire(
             "Eliminado!",
-            "El pais se elimino correctamente.",
+            "Se elimino correctamente.",
             "success",
             "#45aafd"
           );
