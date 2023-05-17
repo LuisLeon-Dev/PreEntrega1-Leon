@@ -12,12 +12,26 @@ const getCountryData = (country) => {
         const countryData = [data];
         displayCards(countryData);
       } else {
-        console.log("No fue posible obtener la información del país.");
+        const countries = document.getElementById("cards-container");
+        countries.innerHTML = "";
+        noCountryFound();
       }
     })
     .catch((error) => {
       console.log("Se produjo un error:", error);
     });
+};
+
+const noCountryFound = () => {
+  const infoDOM = document.getElementById("cards-container");
+  const info = document.createElement("div");
+  info.classList.add("info");
+
+  const infoText = document.createElement("p");
+  infoText.textContent = `No fue posible encontrar el país, intentalo otra vez`;
+
+  info.appendChild(infoText);
+  infoDOM.appendChild(info);
 };
 
 //Creacion de la card con el contenido de los paises
@@ -62,7 +76,8 @@ const createCard = (country, isFavorite) => {
           Swal.fire(
             "Eliminado!",
             "El pais se elimino correctamente.",
-            "success"
+            "success",
+            "#45aafd"
           );
         }
       });
@@ -118,6 +133,18 @@ const deleteCountryFromFavorites = (country) => {
   showFavorites();
 };
 
+//funcion para mostrar un mensaje si no se ha agregado nada a favoritos
+const noFavoritesAdded = () => {
+  const favoritesContainer = document.getElementById("favorites-container");
+  favoritesContainer.innerHTML = "";
+
+  const mensaje = document.createElement("p");
+  mensaje.classList.add("info");
+  mensaje.textContent = "Todavía no se ha agregado favoritos";
+
+  favoritesContainer.appendChild(mensaje);
+};
+
 // Función para mostrar los países favoritos en el DOM
 const showFavorites = () => {
   const favoritesContainer = document.getElementById("favorites-container");
@@ -125,7 +152,11 @@ const showFavorites = () => {
 
   let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-  displayCards(favorites, true);
+  if (favorites.length === 0) {
+    noFavoritesAdded();
+  } else {
+    displayCards(favorites, true);
+  }
 };
 
 // Manejador de eventos para el formulario de búsqueda
@@ -141,10 +172,10 @@ const searchFormSubmit = (e) => {
     emptyCard();
   }
 
-  input.value = ""; // Limpiar el campo de búsqueda después de realizar la búsqueda
+  input.value = ""; // Limpiar el input de búsqueda después de realizar la búsqueda
 };
 
-// Obtener referencia al formulario de búsqueda
+// Obtener datos dcel formulario de búsqueda
 const searchForm = document.getElementById("search-form");
 searchForm.addEventListener("submit", searchFormSubmit);
 

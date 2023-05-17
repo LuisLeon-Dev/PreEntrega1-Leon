@@ -314,10 +314,11 @@ input {
     align-items: center;
   }
 }
-.card-container {
+#cards-container {
   display: flex;
   justify-content: center;
   text-align: center;
+  margin: 3rem;
 }
 
 .card {
@@ -344,6 +345,12 @@ input {
   font-weight: 500;
 }
 
+.info {
+  text-align: center;
+  font-size: 20px;
+  margin: 3rem;
+}
+
 .favorites .subtitle {
   text-align: center;
   font-size: 36px;
@@ -351,26 +358,9 @@ input {
 }
 
 #favorites-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-/*Media query*/
-@media screen and (max-width: 1072px) {
-  #favorites-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-@media screen and (max-width: 760px) {
-  #favorites-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media screen and (max-width: 620px) {
-  #favorites-container {
-    grid-template-columns: 1fr;
-    justify-content: center;
-  }
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /*# sourceMappingURL=main.css.map */
