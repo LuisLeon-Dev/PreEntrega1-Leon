@@ -52,7 +52,7 @@ const createCard = (country, isFavorite) => {
 
   const weather = document.createElement("p");
   weather.className = "temp";
-  weather.textContent = `${Number((country.main.temp - 272.15).toFixed(2))}°C `;
+  weather.textContent = `${Number((country.main.temp - 270.15).toFixed(2))}°C `;
 
   const weatherInfo = document.createElement("p");
   weatherInfo.textContent = `Condicion: ${country.weather[0].description}`;
